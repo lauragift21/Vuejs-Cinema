@@ -30,7 +30,7 @@ new Vue({
 					movies: [
 						{title: 'Homecoming', genre: genre.CRIME},
 						{title: 'Kingsmen', genre: genre.ANIMATION},
-						{title: 'Gentleman', genre: genre.COMEDY},
+						{title: 'Gentleman', genre: genre.ANIMATION},
 						{title: 'Geostorm', genre:genre.DRAMA}
 					]	
 				}
