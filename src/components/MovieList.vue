@@ -1,13 +1,25 @@
 <template>
 	<div id='movie-list'>
-		<movie-item v-for="movie in  filteredMovies"  :movie="movie.movie"></movie-item>
+		<div v-if="filteredMovies.length">
+			<movie-item v-for="movie in  filteredMovies"  
+					:movie="movie.movie" 
+					:sessions="movie.sessions" 
+					:day="day">
+			</movie-item>		
+		</div>
+		<div v-else-if="movies.length" class="no-results">
+			No results.
+		</div>
+		<div v-else class="no-results">
+			Loading..
+		</div>
 	</div>
 </template>
 <script>
 import genres from '../util/genres.js';
 import MovieItem from './MovieItem.vue';
 	export default {
-		props: ['genre', 'time', 'movies'],
+		props: ['genre', 'time', 'movies', 'day'],
 		methods: {
 			moviePassesGenreFilter(movie) {
 				if (!this.genre.length) {
@@ -24,9 +36,13 @@ import MovieItem from './MovieItem.vue';
 				}
 			}
 		},
+			sessionPassesTimeFilter() {
+				return true;
+			},
 		computed: {
 			filteredMovies() {
-				return this.movies.filter(this.moviePassesGenreFilter);
+				return this.movies
+					.filter(this.moviePassesGenreFilter);
 			}
 		},
 		components: {
